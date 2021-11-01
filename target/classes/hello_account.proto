@@ -1,0 +1,55 @@
+//使用proto3语法
+syntax = "proto3";
+
+//指定proto文件包名
+package org.cooze.grpc.service;
+
+//指定 java 包名
+option java_package = "org.cooze.grpc.service";
+//指定proto文件生成java文件后的类名
+option java_outer_classname = "ServiceProto";
+
+//开启多文件
+option java_multiple_files = true;
+
+//倒入指定的.proto文件
+//import "entity/req_res.proto";
+
+//定义rpc服务接口
+service Greeter {
+  //服务端接口方法
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+//定义rpc服务接口
+service AccountSer {
+   rpc addAccount(Account) returns (AccountResponse);
+   rpc getAccoutByName(Account) returns (AccountResponse);
+}
+
+
+
+//请求参数
+message HelloRequest {
+  string name = 1;
+}
+
+//响应参数
+message HelloReply {
+  string message = 1;
+}
+
+
+message Account {
+  string name = 1;
+  string sex = 2;
+  int32 age = 3;
+}
+
+message AccountResponse {
+  string msg = 1;
+  int32 code = 2;
+  repeated Account results = 3;
+}
+
+
